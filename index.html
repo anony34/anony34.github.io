@@ -28,7 +28,7 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px; /* This defines the exact gap between videos */
+            gap: 16px; 
             margin-bottom: 60px;
             width: 100%;
         }
@@ -63,7 +63,7 @@
         h3 { margin: 8px 0; font-size: 1.1rem; color: #333; }
         p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; max-width: 320px; }
 
-        /* ROW 1: Centered */
+        /* ROW 1: Centered across all 4 grid units */
         .row-1-full {
             grid-column: span 4;
             background: transparent;
@@ -79,12 +79,12 @@
             margin: 0 auto;  
         }
 
-        /* FIXED ROW 3: Spans full width but aligns items left with the exact same 16px gap */
+        /* ROW 3 CONTAINER: Keeps two videos tight with matching grid gaps */
         .row-3-container {
             grid-column: span 4;
             display: flex;
-            gap: 16px; /* Matches the exact grid gap from Row 2 */
-            justify-content: center; /* Keeps the pairs centered as a unit on screen */
+            gap: 16px; 
+            justify-content: center; 
             width: 100%;
         }
 
@@ -168,7 +168,7 @@
             <p>Description for TMR Season 4 run.</p>
         </div>
 
-        <!-- ROW 3 (2 Videos brought closer together) -->
+        <!-- ROW 3 (2 Videos) -->
         <div class="row-3-container">
             <div class="video-item">
                 <video controls><source src="vanilla_s9_2_scott_0_1_1.mp4" type="video/mp4"></video>
@@ -191,57 +191,43 @@
     
     <div class="grid-container">
 
-        <!-- ROW 1 Placeholder -->
+        <!-- ROW 1 (1 Video) -->
         <div class="row-1-full">
             <div class="video-item">
                 <video controls>
-                    <source src="placeholder.mp4" type="video/mp4">
+                    <source src="s1_vanilla_0001301_audio.pred.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="text-box">
-                    <h3>MOSPA Featured Video</h3>
-                    <p>Add your MOSPA Row 1 video filename and description text here.</p>
+                    <h3>S1 Vanilla 0001301</h3>
+                    <p>Description for Vanilla Season 1 video prediction run under the MOSPA framework.</p>
                 </div>
             </div>
         </div>
 
-        <!-- ROW 2 Placeholders -->
+        <!-- ROW 2 (4 Videos) -->
         <div class="video-item">
-            <video controls><source src="placeholder.mp4" type="video/mp4"></video>
-            <h3>MOSPA Video 2</h3>
-            <p>Description placeholder.</p>
+            <video controls><source src="s2_vanilla_0001301_audio.pred.mp4" type="video/mp4"></video>
+            <h3>S2 Vanilla 0001301</h3>
+            <p>Description for MOSPA Season 2 Vanilla prediction track run.</p>
         </div>
 
         <div class="video-item">
-            <video controls><source src="placeholder.mp4" type="video/mp4"></video>
-            <h3>MOSPA Video 3</h3>
-            <p>Description placeholder.</p>
+            <video controls><source src="s2_csrel_0001301_audio.pred.mp4" type="video/mp4"></video>
+            <h3>S2 CSREL 0001301</h3>
+            <p>Description for MOSPA Season 2 CSREL prediction track run.</p>
         </div>
 
         <div class="video-item">
-            <video controls><source src="placeholder.mp4" type="video/mp4"></video>
-            <h3>MOSPA Video 4</h3>
-            <p>Description placeholder.</p>
+            <video controls><source src="s2_gcr_0001301_audio.pred.pred.mp4" type="video/mp4"><source src="s2_gcr_0001301_audio.pred.mp4" type="video/mp4"></video>
+            <h3>S2 GCR 0001301</h3>
+            <p>Description for MOSPA Season 2 GCR prediction track run.</p>
         </div>
 
         <div class="video-item">
-            <video controls><source src="placeholder.mp4" type="video/mp4"></video>
-            <h3>MOSPA Video 5</h3>
-            <p>Description placeholder.</p>
-        </div>
-
-        <!-- ROW 3 Placeholders -->
-        <div class="row-3-container">
-            <div class="video-item">
-                <video controls><source src="placeholder.mp4" type="video/mp4"></video>
-                <h3>MOSPA Video 6</h3>
-                <p>Description placeholder.</p>
-            </div>
-            <div class="video-item">
-                <video controls><source src="placeholder.mp4" type="video/mp4"></video>
-                <h3>MOSPA Video 7</h3>
-                <p>Description placeholder.</p>
-            </div>
+            <video controls><source src="s2_tmr_0001301_audio.pred.mp4" type="video/mp4"></video>
+            <h3>S2 TMR 0001301</h3>
+            <p>Description for MOSPA Season 2 TMR prediction track run.</p>
         </div>
 
     </div>
