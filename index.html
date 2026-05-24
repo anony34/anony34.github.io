@@ -6,10 +6,12 @@
     <style>
         body {
             font-family: sans-serif;
-            max-width: 2000px; /* Expanded page container to fit larger videos */
-            margin: 0 auto;
+            max-width: 100%;
+            margin: 0;
             padding: 20px;
             background-color: #f5f5f5;
+            box-sizing: border-box;
+            overflow-x: hidden; /* Hard block to guarantee no accidental horizontal scrollbar */
         }
 
         /* Section Headings */
@@ -26,8 +28,9 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+            gap: 16px; /* Tightened gap to maximize screen space */
             margin-bottom: 60px;
+            width: 100%;
         }
 
         /* Standardized video item container */
@@ -36,29 +39,30 @@
             padding: 16px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            width: fit-content; /* Hugs the updated video layout tightly */
-            justify-self: center; /* Centers the card inside its grid column slot */
+            width: fit-content; 
+            justify-self: center;
             
             /* Center alignment mechanics */
             display: flex;
             flex-direction: column;
             align-items: center; 
             text-align: center;
+            box-sizing: border-box;
         }
 
-        /* SCALED UP VIDEO SIZES DIRECTLY */
+        /* PORTRAIT OPTIMISED: TALLER HEIGHT, CONSERVATIVE WIDTH */
         video {
-            width: 450px;          /* Increased width significantly */
-            height: 350px;         /* Increased height significantly */
-            object-fit: contain;   /* Prevents video contents from getting distorted */
-            background-color: #000;/* Fills empty letterbox edges with clean black bars */
+            width: 320px;          /* Safe narrow width to easily fit 4 columns on screen */
+            height: 420px;         /* Maximised vertical length */
+            object-fit: contain;   /* Keeps video context clean without distorting proportions */
+            background-color: #000;/* Fills padding gaps elegantly with black letterbox panels */
             display: block;
             border-radius: 4px;
             margin-bottom: 12px;
         }
 
         h3 { margin: 8px 0; font-size: 1.1rem; color: #333; }
-        p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; max-width: 450px; }
+        p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; max-width: 320px; }
 
         /* Row 1 Overrides */
         .row-1-full {
@@ -93,18 +97,25 @@
             width: fit-content;
         }
 
-        /* Mobile layout fallback */
-        @media (max-width: 1200px) {
+        /* Responsive Breakpoints */
+        @media (max-width: 1450px) { /* Safely transitions to 2 columns on smaller desktop monitors */
             .grid-container {
-                grid-template-columns: 1fr; /* Stacks layout linearly on smaller viewports */
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .row-1-full, .row-3-half {
+                grid-column: span 2;
+            }
+        }
+        @media (max-width: 750px) { /* Transitions to single vertical column on mobile devices */
+            .grid-container {
+                grid-template-columns: 1fr;
             }
             .row-1-full, .row-3-half {
                 grid-column: span 1;
             }
             video {
-                width: 100%; /* Adapts to narrower screens */
-                max-width: 450px;
-                height: auto;
+                width: 100%; 
+                height: auto; /* Drops fixed height on mobile to look perfect on small screens */
             }
         }
     </style>
