@@ -11,6 +11,7 @@
             padding: 20px;
             background-color: #f5f5f5;
             box-sizing: border-box;
+            overflow-x: hidden;
         }
 
         /* Section Headings */
@@ -23,16 +24,24 @@
             margin-bottom: 20px;
         }
 
-        /* 
-           SMART RESPONSIVE GRID: 
-           Instead of forcing 4 columns, auto-fit creates as many large 
-           columns as your screen allows. This stops horizontal scrollbars 
-           while letting videos be as big as possible.
-        */
-        .grid-container {
+        /* ================================================================= */
+        /* BEAT2 GRID CONFIGURATION (4 Columns)                              */
+        /* ================================================================= */
+        .beat2-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 20px; 
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px; 
+            margin-bottom: 60px;
+            width: 100%;
+        }
+
+        /* ================================================================= */
+        /* MOSPA GRID CONFIGURATION (2 Columns to allow much bigger videos)  */
+        /* ================================================================= */
+        .mospa-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Only 2 columns means double the space! */
+            gap: 24px; 
             margin-bottom: 60px;
             width: 100%;
         }
@@ -43,8 +52,9 @@
             padding: 16px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            width: fit-content; 
+            justify-self: center;
             
-            /* Center alignment mechanics */
             display: flex;
             flex-direction: column;
             align-items: center; 
@@ -52,37 +62,37 @@
             box-sizing: border-box;
         }
 
-        /* 
-           BEAT2 VIDEO DIMENSIONS: 
-           Proportional scaling matching widescreen formats to eliminate black gaps.
-        */
-        video {
-            width: 100%;          
-            max-width: 380px;      /* Slightly wider for a much bigger display scale */
-            aspect-ratio: 16 / 9;  /* Perfect widescreen match to stop black spaces */
+        /* BASE VIDEO SIZE (Used by BEAT2) */
+        .beat2-grid video {
+            width: 320px;          
+            height: 420px;         
+            object-fit: contain;   
             background-color: #000;
             display: block;
             border-radius: 4px;
             margin-bottom: 12px;
         }
 
-        /* 
-           MOSPA VIDEO DIMENSIONS:
-           Scales up both width and height cleanly so it looks significantly larger 
-           without forcing vertical empty space.
-        */
-        .mospa-container video {
-            max-width: 440px;      /* Noticeably wider video player size */
-            aspect-ratio: 16 / 9;  /* Keeps the video perfectly pinned to its natural shape */
+        /* LARGE WIDESCREEN VIDEO SIZE (Used by MOSPA) */
+        .mospa-grid video {
+            width: 640px;          /* Maximised width for high visibility */
+            height: 360px;         /* Proportional widescreen 16:9 height to completely eliminate black spaces */
+            object-fit: contain;   
+            background-color: #000;
+            display: block;
+            border-radius: 4px;
+            margin-bottom: 12px;
         }
 
         h3 { margin: 8px 0; font-size: 1.1rem; color: #333; }
-        p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; max-width: 380px; }
-        .mospa-container p { max-width: 440px; }
+        p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; }
+        
+        .beat2-grid p { max-width: 320px; }
+        .mospa-grid p { max-width: 640px; } /* Allows description text to match the larger video width */
 
-        /* ROW 1: Centered nicely across the layout track */
+        /* Full Width Row 1 Layout */
         .row-1-full {
-            grid-column: 1 / -1; /* Smart fallback to span the full grid width dynamically */
+            grid-column: 1 / -1; /* Automatically spans all available columns in both grids */
             background: transparent;
             box-shadow: none;
             padding: 0;
@@ -96,14 +106,43 @@
             margin: 0 auto;  
         }
 
-        /* ROW 3 CONTAINER: Keeps two videos tight with matching layout gaps */
+        /* Row 3 Container for BEAT2 (keeps them close together) */
         .row-3-container {
-            grid-column: 1 / -1;
+            grid-column: span 4;
             display: flex;
-            gap: 20px; 
+            gap: 16px; 
             justify-content: center; 
-            flex-wrap: wrap;
             width: 100%;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1450px) {
+            .beat2-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .row-3-container {
+                grid-column: span 2;
+                flex-wrap: wrap;
+            }
+            .mospa-grid video {
+                width: 100%;
+                height: auto; /* Scales down fluidly on smaller desktop screens */
+                max-width: 640px;
+            }
+        }
+        @media (max-width: 750px) {
+            .beat2-grid, .mospa-grid {
+                grid-template-columns: 1fr;
+            }
+            .row-3-container {
+                grid-column: span 1;
+                flex-direction: column;
+                align-items: center;
+            }
+            .beat2-grid video {
+                width: 100%; 
+                height: auto; 
+            }
         }
     </style>
 </head>
@@ -114,7 +153,7 @@
     <!-- ================================================================= -->
     <h2 class="section-title">BEAT2</h2>
     
-    <div class="grid-container">
+    <div class="grid-container beat2-grid">
 
         <!-- ROW 1 -->
         <div class="row-1-full">
@@ -176,9 +215,9 @@
     <!-- ================================================================= -->
     <h2 class="section-title">MOSPA</h2>
     
-    <div class="grid-container mospa-container">
+    <div class="grid-container mospa-grid">
 
-        <!-- ROW 1 (1 Video) -->
+        <!-- ROW 1 (1 Large Video) -->
         <div class="row-1-full">
             <div class="video-item">
                 <video controls>
@@ -192,7 +231,7 @@
             </div>
         </div>
 
-        <!-- ROW 2 (4 Videos) -->
+        <!-- ROW 2 (2 Large Videos) -->
         <div class="video-item">
             <video controls><source src="s2_vanilla_0001301_audio.pred.mp4" type="video/mp4"></video>
             <h3>S2 Vanilla 0001301</h3>
@@ -205,6 +244,7 @@
             <p>Description for MOSPA Season 2 CSREL prediction track run.</p>
         </div>
 
+        <!-- ROW 3 (2 Large Videos) -->
         <div class="video-item">
             <video controls><source src="s2_gcr_0001301_audio.pred.mp4" type="video/mp4"></video>
             <h3>S2 GCR 0001301</h3>
