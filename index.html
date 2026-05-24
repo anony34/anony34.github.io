@@ -50,6 +50,7 @@
             box-sizing: border-box;
         }
 
+        /* DEFAULT VIDEO SIZE (Used by BEAT2) */
         video {
             width: 320px;          
             height: 420px;         
@@ -58,6 +59,11 @@
             display: block;
             border-radius: 4px;
             margin-bottom: 12px;
+        }
+
+        /* TARGETED EXTENDED LENGTH SPECIFICALLY FOR MOSPA SECTION */
+        .mospa-container video {
+            height: 520px; /* Increased vertical height for MOSPA videos */
         }
 
         h3 { margin: 8px 0; font-size: 1.1rem; color: #333; }
@@ -113,9 +119,9 @@
                 flex-direction: column;
                 align-items: center;
             }
-            video {
+            video, .mospa-container video {
                 width: 100%; 
-                height: auto; 
+                height: auto; /* Fluid adjustment on smaller portable phone dimensions */
             }
         }
     </style>
@@ -185,11 +191,11 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- SECTION 2: MOSPA                                                  -->
+    <!-- SECTION 2: MOSPA (Added mospa-container class wrapper)           -->
     <!-- ================================================================= -->
     <h2 class="section-title">MOSPA</h2>
     
-    <div class="grid-container">
+    <div class="grid-container mospa-container">
 
         <!-- ROW 1 (1 Video) -->
         <div class="row-1-full">
@@ -219,7 +225,7 @@
         </div>
 
         <div class="video-item">
-            <video controls><source src="s2_gcr_0001301_audio.pred.pred.mp4" type="video/mp4"><source src="s2_gcr_0001301_audio.pred.mp4" type="video/mp4"></video>
+            <video controls><source src="s2_gcr_0001301_audio.pred.mp4" type="video/mp4"></video>
             <h3>S2 GCR 0001301</h3>
             <p>Description for MOSPA Season 2 GCR prediction track run.</p>
         </div>
