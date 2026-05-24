@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: sans-serif;
-            max-width: 1400px;
+            max-width: 2000px; /* Expanded page container to fit larger videos */
             margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
@@ -36,6 +36,8 @@
             padding: 16px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            width: fit-content; /* Hugs the updated video layout tightly */
+            justify-self: center; /* Centers the card inside its grid column slot */
             
             /* Center alignment mechanics */
             display: flex;
@@ -44,19 +46,19 @@
             text-align: center;
         }
 
-        /* FIXES THE VIDEO PLAYER SIZES DIRECTLY */
+        /* SCALED UP VIDEO SIZES DIRECTLY */
         video {
-            width: 280px;          /* Fixed exact width */
-            height: 250px;         /* Explicitly increased vertical length of the video player */
-            object-fit: contain;   /* Keeps video proportion inside the player window without stretching */
-            background-color: #000;/* Fills any extra player space cleanly with black background */
+            width: 450px;          /* Increased width significantly */
+            height: 350px;         /* Increased height significantly */
+            object-fit: contain;   /* Prevents video contents from getting distorted */
+            background-color: #000;/* Fills empty letterbox edges with clean black bars */
             display: block;
             border-radius: 4px;
             margin-bottom: 12px;
         }
 
         h3 { margin: 8px 0; font-size: 1.1rem; color: #333; }
-        p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; }
+        p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; max-width: 450px; }
 
         /* Row 1 Overrides */
         .row-1-full {
@@ -64,6 +66,7 @@
             background: transparent;
             box-shadow: none;
             padding: 0;
+            width: 100%;
         }
         .row-1-full .video-item {
             background: #ffffff;
@@ -81,6 +84,7 @@
             background: transparent;
             box-shadow: none;
             padding: 0;
+            width: 100%;
         }
         .row-3-half .video-item {
             background: #ffffff;
@@ -90,12 +94,17 @@
         }
 
         /* Mobile layout fallback */
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .grid-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Stacks layout linearly on smaller viewports */
             }
             .row-1-full, .row-3-half {
                 grid-column: span 1;
+            }
+            video {
+                width: 100%; /* Adapts to narrower screens */
+                max-width: 450px;
+                height: auto;
             }
         }
     </style>
