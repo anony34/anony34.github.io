@@ -11,7 +11,7 @@
             padding: 20px;
             background-color: #f5f5f5;
             box-sizing: border-box;
-            overflow-x: hidden; /* Hard block to guarantee no accidental horizontal scrollbar */
+            overflow-x: hidden;
         }
 
         /* Section Headings */
@@ -28,7 +28,7 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px; /* Tightened gap to maximize screen space */
+            gap: 16px; /* This defines the exact gap between videos */
             margin-bottom: 60px;
             width: 100%;
         }
@@ -50,12 +50,11 @@
             box-sizing: border-box;
         }
 
-        /* PORTRAIT OPTIMISED: TALLER HEIGHT, CONSERVATIVE WIDTH */
         video {
-            width: 320px;          /* Safe narrow width to easily fit 4 columns on screen */
-            height: 420px;         /* Maximised vertical length */
-            object-fit: contain;   /* Keeps video context clean without distorting proportions */
-            background-color: #000;/* Fills padding gaps elegantly with black letterbox panels */
+            width: 320px;          
+            height: 420px;         
+            object-fit: contain;   
+            background-color: #000;
             display: block;
             border-radius: 4px;
             margin-bottom: 12px;
@@ -64,7 +63,7 @@
         h3 { margin: 8px 0; font-size: 1.1rem; color: #333; }
         p { margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4; max-width: 320px; }
 
-        /* Row 1 Overrides */
+        /* ROW 1: Centered */
         .row-1-full {
             grid-column: span 4;
             background: transparent;
@@ -80,42 +79,43 @@
             margin: 0 auto;  
         }
 
-        /* Row 3 Overrides */
-        .row-3-half {
-            grid-column: span 2;
+        /* FIXED ROW 3: Spans full width but aligns items left with the exact same 16px gap */
+        .row-3-container {
+            grid-column: span 4;
             display: flex;
-            justify-content: center;
-            background: transparent;
-            box-shadow: none;
-            padding: 0;
+            gap: 16px; /* Matches the exact grid gap from Row 2 */
+            justify-content: center; /* Keeps the pairs centered as a unit on screen */
             width: 100%;
-        }
-        .row-3-half .video-item {
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            padding: 16px;
-            width: fit-content;
         }
 
         /* Responsive Breakpoints */
-        @media (max-width: 1450px) { /* Safely transitions to 2 columns on smaller desktop monitors */
+        @media (max-width: 1450px) {
             .grid-container {
                 grid-template-columns: repeat(2, 1fr);
             }
-            .row-1-full, .row-3-half {
+            .row-1-full {
                 grid-column: span 2;
             }
+            .row-3-container {
+                grid-column: span 2;
+                flex-wrap: wrap;
+            }
         }
-        @media (max-width: 750px) { /* Transitions to single vertical column on mobile devices */
+        @media (max-width: 750px) {
             .grid-container {
                 grid-template-columns: 1fr;
             }
-            .row-1-full, .row-3-half {
+            .row-1-full {
                 grid-column: span 1;
+            }
+            .row-3-container {
+                grid-column: span 1;
+                flex-direction: column;
+                align-items: center;
             }
             video {
                 width: 100%; 
-                height: auto; /* Drops fixed height on mobile to look perfect on small screens */
+                height: auto; 
             }
         }
     </style>
@@ -143,7 +143,7 @@
             </div>
         </div>
 
-        <!-- ROW 2 -->
+        <!-- ROW 2 (4 Videos) -->
         <div class="video-item">
             <video controls><source src="vanilla_s4_2_scott_0_1_1.mp4" type="video/mp4"></video>
             <h3>Vanilla S4 Scott 0.1.1</h3>
@@ -168,16 +168,13 @@
             <p>Description for TMR Season 4 run.</p>
         </div>
 
-        <!-- ROW 3 -->
-        <div class="row-3-half">
+        <!-- ROW 3 (2 Videos brought closer together) -->
+        <div class="row-3-container">
             <div class="video-item">
                 <video controls><source src="vanilla_s9_2_scott_0_1_1.mp4" type="video/mp4"></video>
                 <h3>Vanilla S9 Scott 0.1.1</h3>
                 <p>Description for Vanilla Season 9 benchmark evaluation.</p>
             </div>
-        </div>
-
-        <div class="row-3-half">
             <div class="video-item">
                 <video controls><source src="tmr_s9_2_scott_0_1_1.mp4" type="video/mp4"></video>
                 <h3>TMR S9 Scott 0.1.1</h3>
@@ -234,15 +231,12 @@
         </div>
 
         <!-- ROW 3 Placeholders -->
-        <div class="row-3-half">
+        <div class="row-3-container">
             <div class="video-item">
                 <video controls><source src="placeholder.mp4" type="video/mp4"></video>
                 <h3>MOSPA Video 6</h3>
                 <p>Description placeholder.</p>
             </div>
-        </div>
-
-        <div class="row-3-half">
             <div class="video-item">
                 <video controls><source src="placeholder.mp4" type="video/mp4"></video>
                 <h3>MOSPA Video 7</h3>
