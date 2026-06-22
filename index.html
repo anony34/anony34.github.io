@@ -160,6 +160,17 @@
         Audio-Conditioned 3D Motion Generation
     </h1>
 
+<p class="project-description">
+  <strong>Temporal-Modal Replay (TMR)</strong> advances continual learning for audio-conditioned 3D motion generation through:
+  <strong>(a)</strong> a unified framework covering three fundamentally different generator families, including flow matching, autoregressive VQ-VAE, and diffusion, across two qualitatively distinct audio conditioning types, including speech and spatial binaural audio;
+  <strong>(b)</strong> the first continual learning benchmark for audio-conditioned 3D motion generation, evaluated against twelve baselines spanning all four CL paradigms, including memory-based, regularization-based, optimization-based, and architecture-based methods;
+  <strong>(c)</strong> a theoretically grounded temporal feature operator whose principal eigenspace uniquely minimizes replay-induced forgetting among all equal-rank projections;
+  <strong>(d)</strong> up to 75% reduction in catastrophic forgetting, lossless retention with 25% fewer replay samples, and 59% improvement in feature-space coverage over competing replay methods;
+  <strong>(e)</strong> near-flat long-horizon retention across nine sequential sessions where vanilla fine-tuning catastrophically diverges, using only a 15% replay buffer; and
+  <strong>(f)</strong> zero additional trainable parameters, zero inference overhead, and negligible replay construction cost, working across generator architectures with no auxiliary model or architectural modification.
+</strong>
+</p>
+
     <!-- ================================================================= -->
     <!-- SECTION 1: BEAT2                                                  -->
     <!-- ================================================================= -->
